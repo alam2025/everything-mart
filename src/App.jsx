@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import './App.css'
 import CustomerDataTable from './Customer-data-table/CustomerDataTable';
+import CustomModal from './components/Modal/CustomModal';
 
 
 
@@ -9,6 +10,8 @@ function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState('');
   const [isPending, setPending] = useState(false);
+  const [showPopup,setShowPopup]= useState(false);
+  const [id,setId]=useState('')
 
 
   const handleFileChange = (event) => {
@@ -53,6 +56,10 @@ function App() {
 
   return (
     <>
+    {
+      showPopup &&
+      <CustomModal setShowPopup={setShowPopup} id={id} setId={setId}></CustomModal>
+    }
       <div>
         <form onSubmit={handleSubmit} className=' flex flex-col md:flex-row   w-1/2 mx-auto '>
           <div className=' relative'>
@@ -72,7 +79,7 @@ function App() {
         </form>
 
         <div className=' md:w-3/4 border mx-auto mt-8'>
-          <CustomerDataTable ></CustomerDataTable>
+          <CustomerDataTable setShowPopup={setShowPopup} setId={setId}></CustomerDataTable>
         </div>
       </div>
     </>

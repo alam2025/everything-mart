@@ -3,7 +3,7 @@ import useCustomerData from '../hooks/useCustomerdata';
 import Table from './Table';
 
 
-const CustomerDataTable = () => {
+const CustomerDataTable = ({setShowPopup,setId}) => {
      const [customerData, refetch]= useCustomerData()
       
      
@@ -12,8 +12,8 @@ const CustomerDataTable = () => {
                   <table className="table ">
                         {/* head */}
                         <thead>
-                              <tr>
-                                    <th>Order Id</th>
+                              <tr className=' bg-slate-800  text-white'>
+                                    <th className=' '>Order Id</th>
                                     <th>Customer Name</th>
                                     <th>Total Amount</th>
                                     <th>Order Date</th>
@@ -25,6 +25,8 @@ const CustomerDataTable = () => {
                                     customerData.map((data,index)=><Table
                                     key={index}
                                     data={data}
+                                    setShowPopup={setShowPopup}
+                                    setId={setId}
                                     ></Table>)
                               }
                               
