@@ -1,10 +1,11 @@
 import React from 'react';
 import { RxAvatar } from "react-icons/rx";
+import { Link } from 'react-router-dom';
 const Header = () => {
       return (
             <div className="navbar bg-base-100 border-b shadow-sm py-2  md:px-20">
                   <div className="flex-1">
-                        <a className="btn btn-ghost normal-case text-xl">EvertThingMart</a>
+                        <Link to='/' className="btn btn-ghost normal-case text-xl">EveryThingMart</Link>
                   </div>
                   <div className="flex-none gap-2">
                        

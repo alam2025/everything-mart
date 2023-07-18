@@ -3,7 +3,7 @@ import useCustomerData from "../../../hooks/useCustomerdata";
 import CustomModal from "../../../components/Modal/CustomModal";
 import CustomerDataTable from "../../Customer-data-table/CustomerDataTable";
 import Loader from "../../../components/Loader";
-
+import Papa from "papaparse";
 
 const Home = () => {
       const [customerData, , isLoading] = useCustomerData();
@@ -13,13 +13,38 @@ const Home = () => {
       const [showPopup, setShowPopup] = useState(false);
       const [id, setId] = useState('');
       const [searchText, setSearchText] = useState('');
-      const [isAll, setAll]= useState(true)
+      const [isAll, setAll] = useState(true)
       if (isLoading) {
-            return <Loader/>
+            return <Loader />
       }
 
+
+
+
+
       const handleFileChange = (event) => {
-            setSelectedFile(event.target.files[0]);
+            // setSelectedFile(event.target.files[0]);
+            const file= event.target.files[0];
+
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                  const csvData = e.target.result;
+                  Papa.parse(csvData, {
+                        header: true,
+                        complete: (results) => {
+                              const jsonData = results.data;
+                              // Do something with the converted JSON data
+                           
+                              setSelectedFile(jsonData)
+                        },
+                        error: (error) => {
+                              console.error("Error parsing CSV:", error);
+                        },
+                  });
+            };
+
+            reader.readAsText(file);
       }
 
       const handleSubmit = (event) => {
@@ -27,13 +52,15 @@ const Home = () => {
             setPending(true);
             // Handle the file upload here
             if (selectedFile) {
-                  const formData = new FormData();
-                  formData.append('file', selectedFile);
+                  
 
                   // Make the API request to upload the file
-                  fetch('http://localhost:4000/data/upload', {
+                  fetch('https://everything-mart-server.vercel.app/data/upload', {
                         method: 'POST',
-                        body: formData,
+                        headers:{
+                              'Content-Type':'application/json'
+                        },
+                        body: JSON.stringify(selectedFile),
                   })
                         .then((response) => {
                               if (response.ok) {
@@ -59,14 +86,14 @@ const Home = () => {
             setSearchText(event.target.value)
 
       }
-     
+
 
       let filteredData = customerData.filter((customer) =>
             customer.customerName.toLowerCase().includes(searchText.toLowerCase())
       );
 
-      
-      filteredData= isAll ?filteredData= filteredData.slice(0,10):filteredData;
+
+      filteredData = isAll ? filteredData = filteredData.slice(0, 10) : filteredData;
       return (
             <>
                   {/* show modal after click on customer Id  */}
@@ -107,13 +134,13 @@ const Home = () => {
 
                         <div className=' md:w-3/4 border mx-auto my-8'>
                               <CustomerDataTable
-                              customerData={filteredData}
+                                    customerData={filteredData}
                                     setShowPopup={setShowPopup}
                                     setId={setId}
                               ></CustomerDataTable>
                         </div>
-                        <div className={`flex justify-center items-center ${!isAll &&'hidden'}`}>
-                              <button  onClick={()=>setAll(!isAll)} className="btn btn-sm btn-secondary">Show More</button>
+                        <div className={`flex justify-center items-center ${!isAll && 'hidden'}`}>
+                              <button onClick={() => setAll(!isAll)} className="btn btn-sm btn-secondary">Show More</button>
                         </div>
                   </div>
             </>

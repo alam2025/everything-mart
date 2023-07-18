@@ -14,7 +14,7 @@ const Invoice = () => {
       const { data: customerData = [], isLoading } = useQuery({
             queryKey: ['customerData'],
             queryFn: async () => {
-                  const res = await fetch(`http://localhost:4000/customer_info/${id}`);
+                  const res = await fetch(`https://everything-mart-server.vercel.app/customer_info/${id}`);
                   return res.json();
             }
       })

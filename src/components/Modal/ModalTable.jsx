@@ -9,7 +9,7 @@ const ModalTable = ({ data,index }) => {
                   <td>{data['Order ID']}</td>
                   <td>{data['Item Name']}</td>
                   <td>{moment(data['Order Date']).format("DD / MM / YYYY")}</td>
-                  <td>{data['Unit Price']}</td>
+                  <td>${data['Unit Price']}</td>
                   <td>{data['Quantity']}</td>
             </tr>
       );
