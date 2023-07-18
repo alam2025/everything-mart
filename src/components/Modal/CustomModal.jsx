@@ -16,14 +16,14 @@ const CustomModal = ({ setShowPopup, id, setId }) => {
       
 
       return (
-            <div className="modalBackground">
+            <div className="modalBackground ">
                   <div className=" bg-white px-6 py-10 rounded-lg shadow-lg w-[90%] md:w-3/4 z-10">
                         <div className="  flex justify-end items-end">
                               <button className="btn btn-sm btn-secondary z-20 font-bold" onClick={() => [setShowPopup(false), setId('')]}>X</button>
                         </div>
                         <h1 className="text-center text-xl font-bold mb-6">{customerData[0]?.Customer} Details</h1>
 
-                        <div className="overflow-x-auto">
+                        <div className="overflow-x-auto overflow-y-auto h-[300px]">
                               <table className="table ">
                                     {/* head */}
                                     <thead>

@@ -1,15 +1,10 @@
 import React from 'react';
-import useCustomerData from '../hooks/useCustomerdata';
+import useCustomerData from '../../hooks/useCustomerdata';
 import Table from './Table';
 
 
-const CustomerDataTable = ({ setShowPopup, setId }) => {
-      let [customerData, refetch,isLoading] = useCustomerData();
-      if(isLoading){
-            return <h2>loadin...</h2>
-      }
-
-      // customerData = customerData.slice(0, 10)
+const CustomerDataTable = ({ setShowPopup, setId ,customerData}) => {
+     
       return (
            
             <div className="overflow-x-auto">
@@ -33,6 +28,7 @@ const CustomerDataTable = ({ setShowPopup, setId }) => {
                                     setShowPopup={setShowPopup}
                                     setId={setId}
                                     index={index}
+                                    
                                     ></Table>)
                               }
 

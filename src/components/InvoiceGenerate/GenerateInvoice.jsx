@@ -4,7 +4,7 @@ import moment from 'moment';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
-
+import { FiDownload, FiPrinter } from "react-icons/fi";
 const GenerateInvoice = ({ customerData }) => {
       const navigate = useNavigate()
       const [loader, setLoader] = useState(false);
@@ -59,19 +59,19 @@ const GenerateInvoice = ({ customerData }) => {
 
                   <div className=' flex justify-between'>
                         <h1 className='text-4xl font-bold text-purple-700 '>Invoice</h1>
-                        <div>
+                        <div className=' flex gap-4'>
                               <button
                                     onClick={handleInvoice}
-                                    className='btn btn-sm'
+                                    className=''
                                     disabled={!(loader === false)}
                               >
                                     {loader ? (
                                           <span>Downloading</span>
                                     ) : (
-                                          <span>Download</span>
+                                          <span><FiDownload size={25}/></span>
                                     )}
                               </button>
-                              <button onClick={handlePrint} className=' btn btn-sm'>Print</button>
+                              <button onClick={handlePrint}><FiPrinter size={30}/></button>
                         </div>
                   </div>
 
