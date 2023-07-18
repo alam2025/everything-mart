@@ -3,16 +3,20 @@ import { useState } from 'react';
 import './App.css'
 import CustomerDataTable from './Customer-data-table/CustomerDataTable';
 import CustomModal from './components/Modal/CustomModal';
+import useCustomerData from './hooks/useCustomerdata';
 
 
 
 function App() {
+  const [,,isLoading]= useCustomerData();
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState('');
   const [isPending, setPending] = useState(false);
   const [showPopup,setShowPopup]= useState(false);
   const [id,setId]=useState('')
-
+ if(isLoading){
+  return <h2>Loading...</h2>
+ }
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -25,9 +29,6 @@ function App() {
     if (selectedFile) {
       const formData = new FormData();
       formData.append('file', selectedFile);
-
-      console.log(formData);
-
 
       // Make the API request to upload the file
       fetch('http://localhost:4000/data/upload', {
@@ -65,7 +66,7 @@ function App() {
         <form onSubmit={handleSubmit} className=' flex flex-col md:flex-row   w-1/2 mx-auto mt-12'>
           <div className=' relative'>
 
-            <input type="file" accept=".csv" onChange={handleFileChange} />
+            <input type="file" accept=".csv" onChange={handleFileChange} required />
             {error &&
               <p className=' text-red-500 absolute'>{error}</p>}
           </div>
@@ -74,7 +75,7 @@ function App() {
               <span className="loading loading-spinner z-10"></span>
             </button>
               :
-              <button className='btn btn-secondary px-20 '> Submit</button>
+              <button className='btn btn-secondary px-20 '> Upload</button>
           }
 
         </form>

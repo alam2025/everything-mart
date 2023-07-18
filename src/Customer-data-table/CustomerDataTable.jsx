@@ -4,10 +4,12 @@ import Table from './Table';
 
 
 const CustomerDataTable = ({ setShowPopup, setId }) => {
-      let [customerData, refetch] = useCustomerData();
-      console.log(customerData);
+      let [customerData, refetch,isLoading] = useCustomerData();
+      if(isLoading){
+            return <h2>loadin...</h2>
+      }
 
-      customerData = customerData.slice(0, 10)
+      // customerData = customerData.slice(0, 10)
       return (
            
             <div className="overflow-x-auto">
