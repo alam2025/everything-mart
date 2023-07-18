@@ -28,6 +28,7 @@ const CustomModal = ({ setShowPopup, id, setId }) => {
                                     {/* head */}
                                     <thead>
                                           <tr className=' bg-slate-900  text-white'>
+                                                <th className=' '>#</th>
                                                 <th className=' '>Order Id</th>
                                                 <th>Item Name</th>
                                                 <th>Order Date</th>
@@ -41,6 +42,7 @@ const CustomModal = ({ setShowPopup, id, setId }) => {
                                                customerData?.map((data,index)=><ModalTable
                                                key={index}
                                                data={data}
+                                               index={index}
                                                ></ModalTable>) 
                                           }
 

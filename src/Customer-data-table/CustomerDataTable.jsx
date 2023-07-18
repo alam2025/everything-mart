@@ -3,16 +3,19 @@ import useCustomerData from '../hooks/useCustomerdata';
 import Table from './Table';
 
 
-const CustomerDataTable = ({setShowPopup,setId}) => {
-     const [customerData, refetch]= useCustomerData()
-      
-     
+const CustomerDataTable = ({ setShowPopup, setId }) => {
+      let [customerData, refetch] = useCustomerData();
+      console.log(customerData);
+
+      customerData = customerData.slice(0, 10)
       return (
+           
             <div className="overflow-x-auto">
                   <table className="table ">
-                        {/* head */}
+
                         <thead>
                               <tr className=' bg-slate-800  text-white'>
+                                    <th>#</th>
                                     <th className=' '>Order Id</th>
                                     <th>Customer Name</th>
                                     <th>Total Amount</th>
@@ -27,9 +30,10 @@ const CustomerDataTable = ({setShowPopup,setId}) => {
                                     data={data}
                                     setShowPopup={setShowPopup}
                                     setId={setId}
+                                    index={index}
                                     ></Table>)
                               }
-                              
+
                         </tbody>
                   </table>
             </div>

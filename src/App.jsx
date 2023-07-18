@@ -56,12 +56,13 @@ function App() {
 
   return (
     <>
+    {/* show modal after click on customer Id  */}
     {
       showPopup &&
       <CustomModal setShowPopup={setShowPopup} id={id} setId={setId}></CustomModal>
     }
       <div>
-        <form onSubmit={handleSubmit} className=' flex flex-col md:flex-row   w-1/2 mx-auto '>
+        <form onSubmit={handleSubmit} className=' flex flex-col md:flex-row   w-1/2 mx-auto mt-12'>
           <div className=' relative'>
 
             <input type="file" accept=".csv" onChange={handleFileChange} />
@@ -78,7 +79,9 @@ function App() {
 
         </form>
 
-        <div className=' md:w-3/4 border mx-auto mt-8'>
+        {/* all data show in table format  */}
+
+        <div className=' md:w-3/4 border mx-auto my-8'>
           <CustomerDataTable setShowPopup={setShowPopup} setId={setId}></CustomerDataTable>
         </div>
       </div>
