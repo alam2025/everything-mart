@@ -2,6 +2,7 @@ import { useState } from "react";
 import useCustomerData from "../../../hooks/useCustomerdata";
 import CustomModal from "../../../components/Modal/CustomModal";
 import CustomerDataTable from "../../Customer-data-table/CustomerDataTable";
+import Loader from "../../../components/Loader";
 
 
 const Home = () => {
@@ -14,7 +15,7 @@ const Home = () => {
       const [searchText, setSearchText] = useState('');
       const [isAll, setAll]= useState(true)
       if (isLoading) {
-            return <h2>Loading...</h2>
+            return <Loader/>
       }
 
       const handleFileChange = (event) => {

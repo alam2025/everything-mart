@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import GenerateInvoice from './GenerateInvoice';
+import Loader from '../Loader';
 
 
 
@@ -19,7 +20,7 @@ const Invoice = () => {
       })
 
       if (isLoading) {
-            return <h2>loding....</h2>
+            return <Loader/>
       }
 
 
